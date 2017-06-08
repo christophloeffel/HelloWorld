@@ -16,11 +16,12 @@
 		
 		
         
-        color: lightgray;
+        color: #fcc7c7;
       }
+	  
 	  .d3-tip {
         font-family: 'Pacifico', cursive;
-        font-size: 1em;
+        font-size: 1.5em;
         line-height: 1;
         padding: 7px;
         background: black;
@@ -44,7 +45,7 @@
 	var color = d3.scale.threshold()
     .domain([100000, 1000000, 5000000])
    
-	.range(["#596cf9", "#333e8e", "#181e47", "#7d89db"]);
+	.range(["#fcc7c7", "#ffadad", "#f95252", "#ef2b2b"]);
 	
 	
 	
@@ -62,7 +63,9 @@ var margin = { left: 0, top: 0, right: 0, bottom: 0 };
 
 	var svg = d3.select("body").append("svg")
 	.attr("width", outerWidth)
-	.attr("height", outerHeight);
+	.attr("height", outerHeight)
+	.attr("fill", "black");
+	
 
 var zoom = d3.behavior.zoom()
     .scaleExtent([1, 100])
@@ -70,7 +73,8 @@ var zoom = d3.behavior.zoom()
 	
 	var g = svg.append("g")
 	 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-	 .call(zoom);
+	 .call(zoom)
+	 
 	 //#################
 	 var rect = g.append("rect")
         .attr("width", outerWidth)
@@ -97,7 +101,7 @@ var populationFormat = d3.format(",");
 	
 	 var xScale = d3.scale.linear().range([0, innerWidth]);
 	 var yScale = d3.scale.linear().range([innerHeight, 0]);
-	var rScale = d3.scale.sqrt().range([0.01,3]);
+	var rScale = d3.scale.sqrt().range([0.1,3]);
 	g.call(tip);
 	function render(data){
 	xScale.domain( d3.extent(data, function (d){ return d[xColumn]; }));
