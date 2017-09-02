@@ -2,13 +2,17 @@
 <html>
   <head>
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <meta charset="utf-8">
     <title>D3</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.3/d3-tip.min.js"></script>
  <script src="http://d3js.org/topojson.v0.min.js"></script> 
  <style>
+ h1{
+ position: relative;
  
+ }
    body {
         background: black;
 		 font-family: 'Pacifico', cursive;
@@ -18,9 +22,9 @@
         
         color: #fcc7c7;
       }
-	  
+	  svg { position:fixed; top:50px; left:0; height:100%; width:100% }
 	  .d3-tip {
-        font-family: 'Pacifico', cursive;
+       font-family: 'Raleway', sans-serif;
         font-size: 1.5em;
         line-height: 1;
         padding: 7px;
@@ -34,11 +38,11 @@
         stroke: white;
         stroke-width: 1px;
       }
-
+	  
 	  </style>
   </head>
   <body>
-  <h1><center>Cities of the World.</center></h1>
+  <h1><center>Hello World.</center></h1>
 
     <script>
 	
@@ -50,8 +54,11 @@
 	
 	
 var margin = { left: 0, top: 0, right: 0, bottom: 0 };
-	var outerWidth = window.innerWidth-window.innerWidth*0.02;
-	var outerHeight = window.innerHeight-window.innerHeight*0.15;
+
+//calculate optimal window size
+
+	var outerWidth = window.innerHeight*2;
+	var outerHeight = window.innerHeight;
 	var xColumn = "longitude";
 	var yColumn = "latitude";
 	var rColumn = "population"
@@ -73,8 +80,8 @@ var zoom = d3.behavior.zoom()
 	
 	var g = svg.append("g")
 	 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-	 .call(zoom)
-	 
+	 .call(zoom);
+	
 	 //#################
 	 var rect = g.append("rect")
         .attr("width", outerWidth)
@@ -96,7 +103,7 @@ var populationFormat = d3.format(",");
         .attr("class", "d3-tip")
         .offset([-10, 0])
         .html(function(d) {
-          return d.name + ": " + populationFormat(d.population);
+          return d.name ;
         });
 	
 	 var xScale = d3.scale.linear().range([0, innerWidth]);
@@ -131,7 +138,7 @@ var populationFormat = d3.format(",");
         return d;
       }
 	
-	 d3.csv("datanew.csv", type, render);
+	 d3.csv("data.csv", type, render);
 
     </script>
   </body>
